@@ -10,8 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class InMemoryMealRepository implements MealRepository {
-    private final Map<Integer, Meal> repository = new ConcurrentHashMap<>();
-    private final AtomicInteger counter = new AtomicInteger(0);
+    private static final Map<Integer, Meal> repository = new ConcurrentHashMap<>();
+    private static final AtomicInteger counter = new AtomicInteger(0);
 
     {
         MealsUtil.meals.forEach(this::save);
