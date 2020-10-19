@@ -6,30 +6,24 @@ import ru.javawebinar.topjava.repository.UserRepository;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Repository
-public class InMemoryUserRepository implements UserRepository {
-
-    public static final int USER_ID = 1;
-    public static final int ADMIN_ID = 2;
+public class InMemoryUserRepository extends InMemoryBaseRepository<User> implements UserRepository {
 
     static final int USER_ID = 1;
     static final int ADMIN_ID = 2;
 
     @Override
     public List<User> getAll() {
-        return usersMap.values().stream()
+        return getCollection().stream()
                 .sorted(Comparator.comparing(User::getName).thenComparing(User::getEmail))
                 .collect(Collectors.toList());
     }
 
     @Override
     public User getByEmail(String email) {
-        return usersMap.values().stream()
+        return getCollection().stream()
                 .filter(u -> email.equals(u.getEmail()))
                 .findFirst()
                 .orElse(null);
