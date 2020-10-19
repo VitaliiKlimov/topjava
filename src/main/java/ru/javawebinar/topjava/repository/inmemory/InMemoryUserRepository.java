@@ -17,28 +17,8 @@ public class InMemoryUserRepository implements UserRepository {
     public static final int USER_ID = 1;
     public static final int ADMIN_ID = 2;
 
-    private Map<Integer, User> usersMap = new ConcurrentHashMap<>();
-    private AtomicInteger counter = new AtomicInteger(0);
-
-    @Override
-    public User save(User user) {
-        if (user.isNew()) {
-            user.setId(counter.incrementAndGet());
-            usersMap.put(user.getId(), user);
-            return user;
-        }
-        return usersMap.computeIfPresent(user.getId(), (id, oldUser) -> user);
-    }
-
-    @Override
-    public boolean delete(int id) {
-        return usersMap.remove(id) != null;
-    }
-
-    @Override
-    public User get(int id) {
-        return usersMap.get(id);
-    }
+    static final int USER_ID = 1;
+    static final int ADMIN_ID = 2;
 
     @Override
     public List<User> getAll() {
