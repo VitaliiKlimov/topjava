@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Set;
 import ru.javawebinar.topjava.repository.JpaUtil;
 
+import ru.javawebinar.topjava.repository.JpaUtil;
+
 import static org.junit.Assert.assertThrows;
 import static ru.javawebinar.topjava.UserTestData.*;
 

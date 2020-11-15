@@ -13,27 +13,28 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
-@Table(name="meals",uniqueConstraints = {@UniqueConstraint(columnNames = "user_id",name = "date_time")})
+@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = "user_id", name = "date_time")})
 public class Meal extends AbstractBaseEntity {
 
     public static final String ALL_SORTED = "Meal.getAll";
     public static final String DELETE = "Meal.delete";
     public static final String GET_BETWEEN = "Meal.getBetween";
 
-    @Column(name="date_time",nullable = false)
+    @Column(name = "date_time", nullable = false)
     @NotNull
     private LocalDateTime dateTime;
 
-    @Column(name="description",nullable = false)
+    @Column(name = "description", nullable = false)
     @NotBlank
     private String description;
 
-    @Column(name="calories",nullable = false)
+    @Column(name = "calories", nullable = false)
     @Range(min = 10, max = 10000)
     private int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private User user;
 
